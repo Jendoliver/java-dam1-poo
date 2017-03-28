@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Serie
 {
     //Attributes
     String title = "undefined";
-    int nseasons = 3;
+    ArrayList<Season> seasons = new ArrayList<Season>();
     boolean delivered = false;
     String genre = "undefined";
     String creator = "undefined";
@@ -15,9 +17,9 @@ public class Serie
         setTitle(newTitle);
         setCreator(newCreator);
     }
-    public Serie(String newTitle, int newNseasons, String newGenre, String newCreator) {
+    public Serie(String newTitle, ArrayList<Season> newSeasons, String newGenre, String newCreator) {
         setTitle(newTitle);
-        setNseasons(newNseasons);
+        setSeasons(newSeasons);
         setGenre(newGenre);
         setCreator(newCreator);
     }
@@ -26,8 +28,8 @@ public class Serie
     public void setTitle(String newTitle) {
         this.title = newTitle;
     }
-    public void setNseasons(int newNseasons) {
-        this.nseasons = newNseasons;
+    public void setSeasons(ArrayList<Season> newSeasons) {
+        this.seasons = (ArrayList)newSeasons.clone();
     }
     public void setGenre(String newGenre) {
         this.genre = newGenre;
@@ -40,8 +42,8 @@ public class Serie
     public String getTitle() {
         return this.title;
     }
-    public int getNseasons() {
-        return this.nseasons;
+    public ArrayList<Season> getSeasons() {
+        return this.seasons;
     }
     public String getGenre() {
         return this.genre;
@@ -51,4 +53,21 @@ public class Serie
     }
     
     //Methods
+    public void addSeason(Season newSeason)
+    {
+        seasons.add(newSeason);
+    }
+    
+    public void removeSeason(int index)
+    {
+        seasons.remove(index);
+    }
+    
+    public String listSeasons()
+    {
+        String output = "";
+        for(int i=0; i<seasons.size(); i++)
+            output += "Season "+(i+1)+": "+seasons.get(i).getNchapters()+" chapters.\n";
+        return output;
+    }
 }

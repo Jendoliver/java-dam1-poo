@@ -49,7 +49,7 @@ public class Password
     {
         String passlist = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         String newPass = "";
-        for(int i=0; i<getLongitud(); i++)
+        for(int i=0; i<this.longitud; i++)
         {
             int c = (int)(Math.random()*passlist.length());
             newPass += passlist.charAt(c);
