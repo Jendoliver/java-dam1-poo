@@ -39,7 +39,10 @@ public class Persona
         this.edad = newEdad;
     }
     public void setSexo(char newSexo) {
-        this.sexo = newSexo;
+        if(comprobarSexo(newSexo))
+            this.sexo = newSexo;
+        else
+            this.sexo = 'H';
     }
     public void setPeso(double newPeso) {
         this.peso = newPeso;
@@ -75,26 +78,23 @@ public class Persona
         if(imc >= 18.5 && imc < 25)
             return 0;
         else if(imc < 18.5)
-            return 1;
-        return -1;
+            return -1;
+        return 1;
     }
     
     public boolean esMayorDeEdad()
     {
-        return this.getEdad() > 17;
+        return this.edad > 17;
     }
     
     private boolean comprobarSexo(char sexo)
     {
-        if(this.getSexo() == 'H' || this.getSexo() == 'M')
-            return true;
-        this.setSexo('H');
-        return false;
+        return (sexo == 'H' || sexo == 'M' || sexo == 'h' || sexo == 'm'); 
     }
     
     public String toString()
     {
-        return "Nombre: "+this.getNombre()+", Edad: "+this.getEdad()+", DNI: "+this.getDNI()+", Sexo: "+this.getSexo()+", Peso: "+this.getPeso()+", Altura: "+this.getAltura();
+        return "Nombre: "+this.nombre+", Edad: "+this.edad+", DNI: "+this.dni+", Sexo: "+this.sexo+", Peso: "+this.peso+", Altura: "+this.altura;
     }
     
     public void generaDNI()
