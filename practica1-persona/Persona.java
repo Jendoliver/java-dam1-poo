@@ -41,8 +41,6 @@ public class Persona
     public void setSexo(char newSexo) {
         if(comprobarSexo(newSexo))
             this.sexo = newSexo;
-        else
-            this.sexo = 'H';
     }
     public void setPeso(double newPeso) {
         this.peso = newPeso;
