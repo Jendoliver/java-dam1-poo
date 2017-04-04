@@ -39,12 +39,11 @@ public class Date
     public String showDate(Date date)
     {
         String res = "";
-        int day, month, year;
-        res += day=date.getDay() > 9 ? day : "0"+day; 
+        res += (date.getDay() > 9) ? date.getDay() : "0"+date.getDay();
         res += "/";
-        res += month=date.getMonth() > 9 ? month : "0"+month; 
+        res += (date.getMonth() > 9) ? date.getMonth() : "0"+date.getMonth(); 
         res += "/";
-        res += year=date.getYear() > 9 ?  month : "0"+year;
+        res += (date.getYear() > 9) ?  date.getYear() : "0"+date.getYear();
         return res;
     }
     
@@ -67,7 +66,7 @@ public class Date
     private int sumTwoLastDigits(int year) // Aux method
     {
         String str = Integer.toString(year);
-        return (int)str.charAt(str.length()-1)+(int)str.charAt(str.length());
+        return (int)str.charAt(str.length()-2)+(int)str.charAt(str.length()-1);
     }
     
     public int calcDayWeek(Date date)
