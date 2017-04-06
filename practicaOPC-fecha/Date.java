@@ -49,12 +49,12 @@ public class Date
     
     public int calcWeekMonth(Date date)
     {
-        return date.getDay() / 7;
+        return (date.getDay() / 7)+1;
     }
     
     public int calcWeekYear(Date date)
     {
-        return date.getDay()*date.getMonth() / 7;
+        return ((date.getDay()+(date.getMonth()-1)*30) / 7)+1;
     }
     
     public boolean isSpecialYear(Date date)
