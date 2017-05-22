@@ -92,7 +92,7 @@ public class Persona
     
     public String toString()
     {
-        return "Nombre: "+this.nombre+", Edad: "+this.edad+", DNI: "+this.dni+", Sexo: "+this.sexo+", Peso: "+this.peso+", Altura: "+this.altura;
+        return "Nombre: "+this.nombre+", Edad: "+this.edad+", DNI: "+this.DNI+", Sexo: "+this.sexo+", Peso: "+this.peso+", Altura: "+this.altura;
     }
     
     public void generaDNI()
