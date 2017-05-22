@@ -1,12 +1,9 @@
-import org.jetbrains.annotations.Contract;
-
 /**
  * Created by the Focking Jendoliver on 22/05/2017.
  * GitHub: github.com/Jendoliver
  */
 public enum BoardCells
 {
-    UNDISCOVERED,
     WATER,
     BOAT;
 
