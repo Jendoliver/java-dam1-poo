@@ -5,6 +5,7 @@ public class Superviviente
     private int nivel = 0;
     private String nombre = "undefined";
     private SkillsPersonaje skill = SkillsPersonaje.RAPIDO;
+    private Arma arma = NULL;
     
     // Constructores
     public Superviviente() {
@@ -32,4 +33,21 @@ public class Superviviente
     }
     
     // Getters
+    public int getVidas() {
+        return vidas;
+    }
+    public int getNivel() {
+        return nivel;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public SkillsPersonaje getSkill() {
+        return skill;
+    }
+    
+    // Methods
+    public boolean tieneArma() {
+        
+    }
 }
