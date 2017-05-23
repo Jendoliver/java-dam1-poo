@@ -6,7 +6,7 @@ public class BNGame
 {
     private Board board;
     private int tries;
-    private int boatpositions;
+    private int occupiedcells;
     private int touches;
     private boolean playagain = false;
 
@@ -19,14 +19,29 @@ public class BNGame
         this.touches = 0;
         this.board = new Board();
         this.tries = this.board.getEmptyCells() / 2;
-        this.boatpositions = this.board.getOccupiedCells();
+        this.occupiedcells = this.board.getOccupiedCells();
     }
 
+    // Getters
+    public Board getBoard() { return this.board; }
+    public int getTries() { return this.tries; }
+    public boolean areBoatsDiscovered() { return this.occupiedcells == this.touches; }
+    public boolean areTriesLeft() { return this.tries > 0; }
+    public boolean wannaPlayAgain()
+    {
+        return this.playagain;
+    }
+
+    // Setters
+    public void setPlayagain(boolean playagain) { this.playagain = playagain; }
+    public void useTry() { this.tries--; }
+
+    // Methods
     public InputChecks checkPosition(int x, int y)
     {
         if(x < 0 || x > board.getWidth() || y < 0 || x > board.getHeight())
             return InputChecks.INVALID;
-        else if( false ) // discovered
+        else if( board.getBoard()[x][y].isDiscovered() )
             return InputChecks.DISCOVERED;
         else if(board.getBoard()[x][y].getContent() == BoardCells.WATER)
             return InputChecks.WATER;
@@ -36,19 +51,46 @@ public class BNGame
             // if not murri
             return InputChecks.TOUCHE;
             // else
-            return InputChecks.MURRI;
+            //return InputChecks.MURRI;
+        }
+        return InputChecks.UNDEFINED;
+    }
+
+    public void processPosition(InputChecks check, int x, int y)
+    {
+        if(check != InputChecks.DISCOVERED && check != InputChecks.INVALID && check != InputChecks.UNDEFINED) {
+            board.getBoard()[x][y].setDiscovered(true);
+            useTry();
         }
     }
 
     public void printBoard()
     {
-
-    }
-
-    public void setPlayagain(boolean playagain) { this.playagain = playagain; }
-    public boolean areBoatsDiscovered() { return this.boatpositions == this.touches; }
-    public boolean wannaPlayAgain()
-    {
-        return this.playagain;
+        int rowcount = 0;
+        for(Cell[] cellrow : board.getBoard()) // Iterates through each row of cells
+        {
+            // Depending on rowcount lenght we print different prefix to avoid matrix unbalancing
+            System.out.print((rowcount > 9) ? rowcount+" -" : rowcount+"  -");
+            for(Cell cell : cellrow)
+            {
+                /*if(cell.isDiscovered()) // Iterates through each cell
+                {*/
+                    if(cell.getContent() == BoardCells.WATER)
+                        System.out.print(" ~ ");
+                    else if(cell.getContent() == BoardCells.BOAT)
+                        System.out.print(" ^ ");
+                /*}*/
+                /*else
+                    System.out.print(" * ");*/
+            }
+            System.out.print("\n\n");
+            rowcount++;
+        }
+        // This prints spaces enough to balance the column indexes with the matrix
+        System.out.print((rowcount > 9) ? "    " : "   ");
+        // Print of the columns indexes
+        for(int i=0; i<board.getWidth(); i++)
+            System.out.print((i > 9) ? " "+i+" " : " "+i);
+        System.out.println();
     }
 }

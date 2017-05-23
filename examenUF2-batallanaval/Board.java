@@ -81,6 +81,7 @@ public class Board
     /**
      * @param boat = boat to add
      *          Adds a boat to the board
+     *             and the cells corresponding to the boat to its instance
      */
     private void addBoat(Boat boat)
     {
@@ -88,13 +89,15 @@ public class Board
         int row = boat.getRow(), col = boat.getCol(), boatsize = boat.getBoatsize();
         if(boat.getOrientation() == Orientations.H)
         {
-            for(int j = col; j < col+boatsize-1; col++)
+            for(int j = col; j < col+boatsize-1; col++) {
                 board[row][j].setContent(BoardCells.BOAT);
+            }
         }
         else
         {
-            for(int i = row; i < row+boatsize-1; row++)
+            for(int i = row; i < row+boatsize-1; row++) {
                 board[i][col].setContent(BoardCells.BOAT);
+            }
         }
     }
 

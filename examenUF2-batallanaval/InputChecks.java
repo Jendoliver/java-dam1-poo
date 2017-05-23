@@ -7,5 +7,6 @@ public enum InputChecks
     DISCOVERED,
     WATER,
     TOUCHE,
-    MURRI
+    MURRI,
+    UNDEFINED
 }
