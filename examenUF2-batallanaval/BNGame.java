@@ -40,6 +40,11 @@ public class BNGame
         }
     }
 
+    public void printBoard()
+    {
+
+    }
+
     public void setPlayagain(boolean playagain) { this.playagain = playagain; }
     public boolean areBoatsDiscovered() { return this.boatpositions == this.touches; }
     public boolean wannaPlayAgain()

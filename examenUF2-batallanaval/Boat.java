@@ -7,6 +7,7 @@ public class Boat
     // Attributes
     private int boatsize;
     private Orientations orientation;
+    private int hits;
     int row;
     int col;
 

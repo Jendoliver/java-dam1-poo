@@ -1,12 +1,12 @@
 public class BatallaNaval
 {
-    // APP CONSTANTS
-    int WIDTH = 10, HEIGHT = 10, BOATS = 4, MAXSIZE = 3;
-    char[] ORIENTATIONS = {'V','H'};
-    char[][] board = new char[WIDTH][HEIGHT];
-    
     public static void main(String[] args)
     {
+        BNGame BNGame = new BNGame();
+        do {
+            printIntro();
+            BNGame.printBoard();
+        } while (BNGame.wannaPlayAgain());
         // GameLoop
             // inicializeBoard (implies...)
                 // placeBoat(5, randomOrientation)
@@ -23,17 +23,9 @@ public class BatallaNaval
         
     }
     
-    public void inicializeBoard()
+    public void printIntro()
     {
-        for(int i=0; i<WIDTH; i++)
-        {
-            for(int j=0; j<HEIGHT; j++)
-                board[i][j] = '~';
-        }
-    }
-    
-    public void placeBoat(int npos, char orientation)
-    {
-        
+        System.out.println("Welcome to Battle Navale!!!");
+        // TODO
     }
 }
