@@ -26,14 +26,12 @@ public class BNGame
     public int getTries() { return this.tries; }
     public boolean areBoatsDiscovered() { return this.occupiedcells == this.touches; }
     public boolean areTriesLeft() { return this.tries > 0; }
-    public boolean wannaPlayAgain()
-    {
-        return this.playagain;
-    }
+    public boolean wannaPlayAgain() { return this.playagain; }
 
     // Setters
     public void setPlayagain(boolean playagain) { this.playagain = playagain; }
     public void useTry() { this.tries--; }
+    public void addTouche() { this.touches++; }
 
     // Methods
     public InputChecks checkPosition(int x, int y)
@@ -60,6 +58,8 @@ public class BNGame
         if(check != InputChecks.DISCOVERED && check != InputChecks.INVALID && check != InputChecks.UNDEFINED) {
             board.getBoard()[x][y].setDiscovered(true);
             useTry();
+            if(check == InputChecks.TOUCHE)
+                addTouche();
         }
     }
 

@@ -32,16 +32,16 @@ public class Boat
         if (orientation == Orientations.H)
         {
             // row = [0, BoardHeight]
-            row = (int) Math.random() * Board.getHeight();
+            row = (int) (Math.random() * Board.getHeight());
             // col = [0, (BoardWidth - boatsize)]
-            col = (int) Math.random() * (Board.getWidth() - boatsize);
+            col = (int) (Math.random() * (Board.getWidth() - boatsize));
         }
         else
         {
             // row = [0, (BoardHeight - boatsize)]
-            row = (int) Math.random() * (Board.getHeight() - boatsize);
+            row = (int) (Math.random() * (Board.getHeight() - boatsize));
             // col = [0, BoardWidth]
-            col = (int) (Math.random() * Board.getWidth());
+            col = (int) ((Math.random() * Board.getWidth()));
         }
     }
 
