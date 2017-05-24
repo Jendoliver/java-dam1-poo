@@ -1,18 +1,19 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class BattleNavale
 {
-    private static BNGame BNGame;
     public static void main(String[] args) throws IOException
     {
+        BNGame BNGame;
         do {
             BNGame = new BNGame();
             printIntro();
             BNGame.printBoard();
             do {
-                System.out.println("Shots left: "+BNGame.getTries());
+                System.out.println("Shots left: "+ BNGame.getTries());
                 int x = askForInput("Input the row to attack: ");
                 int y = askForInput("Input the column to attack: ");
                 InputChecks check = BNGame.checkPosition(x, y);
@@ -61,7 +62,7 @@ public class BattleNavale
             case DISCOVERED:
                 System.out.println("You have already discovered that position..."); break;
             case INVALID:
-                System.out.println("Introduce un rango de filas entre 0 y "+BNGame.getBoard().getHeight()+", y un rango de columnas entre 0 y "+BNGame.getBoard().getWidth()); break;
+                System.out.println("Introduce un rango de filas entre 0 y "+Board.getHeight()+", y un rango de columnas entre 0 y "+ Board.getWidth()); break;
             case UNDEFINED:
                 System.out.println("UNDEFINED"); break;
         }
@@ -80,7 +81,7 @@ public class BattleNavale
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } while (input.toLowerCase() != "y" && input.toLowerCase() != "n");
-        return input.toLowerCase() == "y";
+        } while (! Objects.equals(input.toLowerCase(), "y") && ! Objects.equals(input.toLowerCase(), "n"));
+        return Objects.equals(input.toLowerCase(), "y");
     }
 }

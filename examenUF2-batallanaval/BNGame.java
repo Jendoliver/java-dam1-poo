@@ -23,7 +23,6 @@ public class BNGame
     }
 
     // Getters
-    public Board getBoard() { return this.board; }
     public int getTries() { return this.tries; }
     public boolean areBoatsDiscovered() { return this.occupiedcells == this.touches; }
     public boolean areTriesLeft() { return this.tries > 0; }
@@ -39,7 +38,7 @@ public class BNGame
     // Methods
     public InputChecks checkPosition(int x, int y)
     {
-        if(x < 0 || x > board.getWidth() || y < 0 || x > board.getHeight())
+        if(x < 0 || x > Board.getWidth() || y < 0 || x > Board.getHeight())
             return InputChecks.INVALID;
         else if( board.getBoard()[x][y].isDiscovered() )
             return InputChecks.DISCOVERED;
@@ -89,7 +88,7 @@ public class BNGame
         // This prints spaces enough to balance the column indexes with the matrix
         System.out.print((rowcount > 9) ? "    " : "   ");
         // Print of the columns indexes
-        for(int i=0; i<board.getWidth(); i++)
+        for(int i = 0; i< Board.getWidth(); i++)
             System.out.print((i > 9) ? " "+i+" " : " "+i);
         System.out.println();
     }

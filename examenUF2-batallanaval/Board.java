@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 
 /**
@@ -19,9 +21,11 @@ public class Board
     }
 
     // Getters
+    @Contract(pure = true)
     public static int getWidth() { return width; }
+    @Contract(pure = true)
     public static int getHeight() { return height; }
-    public Cell[][] getBoard() { return this.board; }
+    public Cell[][] getBoard() { return board; }
 
     // Methods
     private void initializeBoard()
@@ -89,13 +93,13 @@ public class Board
         int row = boat.getRow(), col = boat.getCol(), boatsize = boat.getBoatsize();
         if(boat.getOrientation() == Orientations.H)
         {
-            for(int j = col; j < col+boatsize-1; col++) {
+            for(int j = col; j < col+boatsize; j++) {
                 board[row][j].setContent(BoardCells.BOAT);
             }
         }
         else
         {
-            for(int i = row; i < row+boatsize-1; row++) {
+            for(int i = row; i < row+boatsize; i++) {
                 board[i][col].setContent(BoardCells.BOAT);
             }
         }
