@@ -44,11 +44,11 @@ public class BNGame
             return InputChecks.WATER;
         else if(board.getBoard()[x][y].getContent() == BoardCells.BOAT)
         {
-            // TODO
-            // if not murri
-            return InputChecks.TOUCHE;
-            // else
-            //return InputChecks.MURRI;
+            Boat boat = board.getBoard()[x][y].getBoat();
+            if(boat.getHits() + 1 == boat.getBoatsize())
+                return InputChecks.MURRI;
+            else
+                return InputChecks.TOUCHE;
         }
         return InputChecks.UNDEFINED;
     }
@@ -58,8 +58,10 @@ public class BNGame
         if(check != InputChecks.DISCOVERED && check != InputChecks.INVALID && check != InputChecks.UNDEFINED) {
             board.getBoard()[x][y].setDiscovered(true);
             useTry();
-            if(check == InputChecks.TOUCHE)
+            if(check == InputChecks.TOUCHE) {
                 addTouche();
+                board.getBoard()[x][y].getBoat().addHit();
+            }
         }
     }
 
@@ -72,15 +74,15 @@ public class BNGame
             System.out.print((rowcount > 9) ? rowcount+" -" : rowcount+"  -");
             for(Cell cell : cellrow)
             {
-                /*if(cell.isDiscovered()) // Iterates through each cell
-                {*/
+                if(cell.isDiscovered()) // Iterates through each cell
+                {
                     if(cell.getContent() == BoardCells.WATER)
                         System.out.print(" ~ ");
                     else if(cell.getContent() == BoardCells.BOAT)
                         System.out.print(" ^ ");
-                /*}*/
-                /*else
-                    System.out.print(" * ");*/
+                }
+                else
+                    System.out.print(" * ");
             }
             System.out.print("\n\n");
             rowcount++;

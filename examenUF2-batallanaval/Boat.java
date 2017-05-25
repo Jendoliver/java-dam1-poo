@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Created by the Focking Jendoliver on 22/05/2017.
  *  GitHub: github.com/Jendoliver
@@ -9,7 +7,7 @@ public class Boat
     // Attributes
     private int boatsize;
     private Orientations orientation;
-    private ArrayList<Cell> cells;
+    int hits;
     int row;
     int col;
 
@@ -18,10 +16,7 @@ public class Boat
     {
         // Generate a random size
         int MAXSIZE = 3;
-        boatsize = (int) ((Math.random() * (MAXSIZE - 1)) + 1);
-
-        // Generate the cells list
-        cells = new ArrayList();
+        boatsize = (int) (Math.floor(Math.random() * (MAXSIZE - 1 + 1)) + 1);
 
         // Generate a random orientation
         if ((int) (Math.random() * Orientations.getSize()) == 1) {
@@ -50,4 +45,8 @@ public class Boat
     public Orientations getOrientation() { return orientation; }
     public int getRow() { return row; }
     public int getCol() { return col; }
+    public int getHits() { return hits; }
+
+    // Setters
+    public void addHit() { this.hits++; }
 }

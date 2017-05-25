@@ -95,12 +95,14 @@ public class Board
         {
             for(int j = col; j < col+boatsize; j++) {
                 board[row][j].setContent(BoardCells.BOAT);
+                board[row][j].setBoat(boat);
             }
         }
         else
         {
             for(int i = row; i < row+boatsize; i++) {
                 board[i][col].setContent(BoardCells.BOAT);
+                board[i][col].setBoat(boat);
             }
         }
     }
