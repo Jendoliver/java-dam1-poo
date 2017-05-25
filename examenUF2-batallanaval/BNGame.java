@@ -71,27 +71,27 @@ public class BNGame
         for(Cell[] cellrow : board.getBoard()) // Iterates through each row of cells
         {
             // Depending on rowcount lenght we print different prefix to avoid matrix unbalancing
-            System.out.print((rowcount > 9) ? rowcount+" -" : rowcount+"  -");
+            System.out.print((rowcount > 9) ? rowcount+" - " : rowcount+"  - ");
             for(Cell cell : cellrow)
             {
-                if(cell.isDiscovered()) // Iterates through each cell
-                {
+                /*if(cell.isDiscovered()) // Iterates through each cell
+                {*/
                     if(cell.getContent() == BoardCells.WATER)
                         System.out.print(" ~ ");
                     else if(cell.getContent() == BoardCells.BOAT)
                         System.out.print(" ^ ");
-                }
+                /*}
                 else
-                    System.out.print(" * ");
+                    System.out.print(" * ");*/
             }
             System.out.print("\n\n");
             rowcount++;
         }
         // This prints spaces enough to balance the column indexes with the matrix
-        System.out.print((rowcount > 9) ? "    " : "   ");
+        System.out.print((rowcount > 9) ? "     " : "    ");
         // Print of the columns indexes
         for(int i = 0; i< Board.getWidth(); i++)
-            System.out.print((i > 9) ? " "+i+" " : " "+i);
+            System.out.print((i > 9) ? " "+i : " "+i+" ");
         System.out.println();
     }
 }

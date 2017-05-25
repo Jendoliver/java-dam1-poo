@@ -15,7 +15,7 @@ public class Boat
     public Boat()
     {
         // Generate a random size
-        int MAXSIZE = 3;
+        int MAXSIZE = 4;
         boatsize = (int) (Math.floor(Math.random() * (MAXSIZE - 1 + 1)) + 1);
 
         // Generate a random orientation
