@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Board 
 {
     // Attributes
-    private static final int width = 10;
-    private static final int height = 10;
+    private static final int width = 20;
+    private static final int height = 20;
     private static Cell[][] board;
     private static ArrayList<Boat> boats = new ArrayList();
 
@@ -44,7 +44,7 @@ public class Board
     private void placeBoats()
     {
         int boatsplaced = 0;
-        int numboats = 4;
+        int numboats = 8;
         while (boatsplaced < numboats)
         {
             Boat boat = new Boat();

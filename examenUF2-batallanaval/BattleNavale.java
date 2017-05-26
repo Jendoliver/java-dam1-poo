@@ -11,6 +11,7 @@ public class BattleNavale
         BNGame BNGame;
         GameModes mode = decodeArgs(args);
         prepareGameMode(mode);
+        if(mode == GameModes.DOCUMENTATION) return; // Exits game if documentation is printed
         do {
             BNGame = new BNGame();
             printIntro();
@@ -38,15 +39,15 @@ public class BattleNavale
                 case "help":case "man":case "-h":case "-m":
                     return GameModes.DOCUMENTATION;
                 case "easy":case "1":
-                    return GameModes.EASY;
+                    return GameModes.EASY; // 5x5, 3 boats, 3 3 2
                 case "medium":case "2":
-                    return GameModes.MEDIUM;
+                    return GameModes.MEDIUM; // 15x15, 4 boats, 5 4 3 2
                 case "hard":case "3":
-                    return GameModes.HARD;
+                    return GameModes.HARD; // 30x30, 10 boats, 7 7 6 6 5 4 3 2 1 1
                 case "classic":
-                    return GameModes.CLASSIC;
+                    return GameModes.CLASSIC; // 10x10, 5 boats, 5 4 3 3 2
                 case "custom":
-                    return GameModes.CUSTOM;
+                    return GameModes.CUSTOM; // Maxlength: min side of the board - 2,
             }
         }
         return GameModes.CLASSIC;
@@ -74,7 +75,15 @@ public class BattleNavale
 
     private static void printDocumentation()
     {
-        // TODO
+        System.out.println("--- BATTLE NAVALE: Documentation ---");
+        System.out.println("Syntax: java BattleNavale <mode>");
+        System.out.println("<mode> can be one of the following:");
+        System.out.println("-m | -h | help | man --- Prints this documentation");
+        System.out.println("easy | 1 --- Plays the game on easy mode");
+        System.out.println("medium | 2 --- Plays the game on medium mode");
+        System.out.println("hard | 3 --- Plays the game on hard mode");
+        System.out.println("classic --- Plays the game on classic mode");
+        System.out.println("custom --- Plays the game with custom board size, number of boats and max boat length (they will be asked on start)");
     }
     
     private static void printIntro()

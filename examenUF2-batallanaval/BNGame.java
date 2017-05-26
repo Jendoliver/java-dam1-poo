@@ -75,15 +75,15 @@ public class BNGame
             System.out.print((rowcount > 9) ? rowcount+" - " : rowcount+"  - ");
             for(Cell cell : cellrow)
             {
-                if(cell.isDiscovered()) // Iterates through each cell
-                {
+                /*if(cell.isDiscovered()) // Iterates through each cell
+                {*/
                     if (cell.getContent() == BoardCells.WATER)
                         System.out.print(" ~ ");
                     else if (cell.getContent() == BoardCells.BOAT)
                         System.out.print(" O ");
-                }
+                /*}
                 else
-                    System.out.print(" * ");
+                    System.out.print(" * ");*/
             }
             System.out.print("\n\n");
             rowcount++;
