@@ -10,15 +10,12 @@ public class BNGame
     private int touches;
     private boolean playagain = false;
 
-    BNGame() {
-        resetGame();
-    }
-
-    private void resetGame()
+    public BNGame(GameProperties gp)
     {
         this.touches = 0;
-        this.board = new Board();
-        this.tries = this.board.getEmptyCells() / 2;
+        this.board = new Board(gp);
+        // this.tries = this.board.getEmptyCells() / 2; DEPRECATED
+        this.tries = gp.tries;
         this.occupiedcells = this.board.getOccupiedCells();
     }
 

@@ -5,15 +5,14 @@ import java.util.Objects;
 
 public class BattleNavale
 {
-    // TODO: Implement game modes
     public static void main(String[] args) throws IOException
     {
         BNGame BNGame;
         GameModes mode = decodeArgs(args);
-        prepareGameMode(mode);
+        GameProperties gp = prepareGameMode(mode);
         if(mode == GameModes.DOCUMENTATION) return; // Exits game if documentation is printed
         do {
-            BNGame = new BNGame();
+            BNGame = new BNGame(gp);
             printIntro();
             BNGame.printBoard();
             do {
@@ -39,38 +38,73 @@ public class BattleNavale
                 case "help":case "man":case "-h":case "-m":
                     return GameModes.DOCUMENTATION;
                 case "easy":case "1":
-                    return GameModes.EASY; // 5x5, 3 boats, 3 3 2
+                    return GameModes.EASY;
                 case "medium":case "2":
-                    return GameModes.MEDIUM; // 15x15, 4 boats, 5 4 3 2
+                    return GameModes.MEDIUM;
                 case "hard":case "3":
-                    return GameModes.HARD; // 30x30, 10 boats, 7 7 6 6 5 4 3 2 1 1
+                    return GameModes.HARD;
                 case "classic":
-                    return GameModes.CLASSIC; // 10x10, 5 boats, 5 4 3 3 2
+                    return GameModes.CLASSIC;
                 case "custom":
-                    return GameModes.CUSTOM; // Maxlength: min side of the board - 2,
+                    return GameModes.CUSTOM;
             }
         }
         return GameModes.CLASSIC;
     }
 
-    private static void prepareGameMode(GameModes mode)
+    private static GameProperties prepareGameMode(GameModes mode)
     {
+        GameProperties gp = new GameProperties();
         switch(mode)
         {
             case DOCUMENTATION:
-                printDocumentation(); break;
-            case EASY:
+            {
+                printDocumentation();
                 break;
-            case MEDIUM:
+            }
+            case EASY: // 5x5, 3 boats, 3 3 2, 15 tries
+            {
+                int[] boatsarray = {3, 3, 2};
+                gp.width = 5;
+                gp.height = 5;
+                gp.tries = 15;
+                gp.boats = boatsarray;
                 break;
-            case HARD:
+            }
+            case MEDIUM: // 10x10, 4 boats, 5 4 3 2, 50 tries
+            {
+                int[] boatsarray = {5, 4, 3, 2};
+                gp.width = 10;
+                gp.height = 10;
+                gp.tries = 50;
+                gp.boats = boatsarray;
                 break;
-            case CUSTOM:
+            }
+            case HARD: // 20x20, 10 boats, 7 7 6 6 5 4 3 2 1 1
+            {
+                int[] boatsarray = {7, 7, 6, 6, 5, 4, 3, 2, 1, 1};
+                gp.width = 20;
+                gp.height = 20;
+                gp.tries = 180;
+                gp.boats = boatsarray;
                 break;
-            case CLASSIC:
+            }
+            case CLASSIC: // 10x10, 5 boats, 5 4 3 3 2
+            {
+                int[] boatsarray = {5, 4, 3, 3, 2};
+                gp.width = 10;
+                gp.height = 10;
+                gp.tries = 50;
+                gp.boats = boatsarray;
                 break;
+            }
+            case CUSTOM: // Maxlength: min side of the board - 2, TODO: implement custom
+            {
+                gp = askProperties();
+                break;
+            }
         }
-
+        return gp;
     }
 
     private static void printDocumentation()
@@ -90,6 +124,13 @@ public class BattleNavale
     {
         System.out.println("Welcome to Battle Navale!!!");
         // TODO: Extend with boats info (size of each, etc)
+    }
+
+    private static GameProperties askProperties()
+    {
+        GameProperties gp = null;
+        // TODO: Ask for user input
+        return gp;
     }
 
     private static int askForInput(String message)

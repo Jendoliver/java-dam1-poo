@@ -12,12 +12,9 @@ public class Boat
     int col;
 
     // Constructors
-    public Boat()
+    public Boat(int boatsize)
     {
-        // Generate a random size
-        int MAXSIZE = 8;
-        boatsize = (int) (Math.floor(Math.random() * (MAXSIZE - 1 + 1)) + 1);
-
+        this.boatsize = boatsize;
         // Generate a random orientation
         if ((int) (Math.random() * Orientations.getSize()) == 1) {
             orientation = Orientations.H;

@@ -9,15 +9,17 @@ import java.util.ArrayList;
 public class Board 
 {
     // Attributes
-    private static final int width = 20;
-    private static final int height = 20;
+    private static int width;
+    private static int height;
     private static Cell[][] board;
     private static ArrayList<Boat> boats = new ArrayList();
 
     // Constructors
-    public Board() {
+    public Board(GameProperties gp) {
+        this.width = gp.width;
+        this.height = gp.height;
         initializeBoard();
-        placeBoats();
+        placeBoats(gp.boats);
     }
 
     // Getters
@@ -41,13 +43,12 @@ public class Board
      * Loop that calls checkBoatPosition and addBoat if the first returns true
      * for the number of boats to be positioned.
      */
-    private void placeBoats()
+    private void placeBoats(int[] boats)
     {
         int boatsplaced = 0;
-        int numboats = 8;
-        while (boatsplaced < numboats)
+        while (boatsplaced < boats.length)
         {
-            Boat boat = new Boat();
+            Boat boat = new Boat(boats[boatsplaced]);
             if(checkBoatPosition(boat)) {
                 boatsplaced++;
                 addBoat(boat);
