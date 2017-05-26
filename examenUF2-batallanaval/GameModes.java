@@ -8,5 +8,6 @@ public enum GameModes {
     MEDIUM,
     HARD,
     CLASSIC,
-    CUSTOM
+    CUSTOM,
+    DOCUMENTATION
 }

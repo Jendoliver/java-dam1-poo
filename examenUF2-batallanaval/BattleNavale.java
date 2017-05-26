@@ -9,6 +9,8 @@ public class BattleNavale
     public static void main(String[] args) throws IOException
     {
         BNGame BNGame;
+        GameModes mode = decodeArgs(args);
+        prepareGameMode(mode);
         do {
             BNGame = new BNGame();
             printIntro();
@@ -25,6 +27,54 @@ public class BattleNavale
             System.out.println(BNGame.summariseGame());
             BNGame.setPlayagain(askToPlayAgain());
         } while (BNGame.wannaPlayAgain());
+    }
+
+    private static GameModes decodeArgs(String[] args)
+    {
+        if(args.length != 0)
+        {
+            switch (args[0])
+            {
+                case "help":case "man":case "-h":case "-m":
+                    return GameModes.DOCUMENTATION;
+                case "easy":case "1":
+                    return GameModes.EASY;
+                case "medium":case "2":
+                    return GameModes.MEDIUM;
+                case "hard":case "3":
+                    return GameModes.HARD;
+                case "classic":
+                    return GameModes.CLASSIC;
+                case "custom":
+                    return GameModes.CUSTOM;
+            }
+        }
+        return GameModes.CLASSIC;
+    }
+
+    private static void prepareGameMode(GameModes mode)
+    {
+        switch(mode)
+        {
+            case DOCUMENTATION:
+                printDocumentation(); break;
+            case EASY:
+                break;
+            case MEDIUM:
+                break;
+            case HARD:
+                break;
+            case CUSTOM:
+                break;
+            case CLASSIC:
+                break;
+        }
+
+    }
+
+    private static void printDocumentation()
+    {
+        // TODO
     }
     
     private static void printIntro()
