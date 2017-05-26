@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class BattleNavale
 {
+    // TODO: Implement game modes
     public static void main(String[] args) throws IOException
     {
         BNGame BNGame;
@@ -20,7 +21,8 @@ public class BattleNavale
                 BNGame.processPosition(check, x, y);
                 BNGame.printBoard();
                 printInputCheck(check);
-            } while (!BNGame.areBoatsDiscovered() && BNGame.areTriesLeft());
+            } while ( ! BNGame.isGameFinished());
+            System.out.println(BNGame.summariseGame());
             BNGame.setPlayagain(askToPlayAgain());
         } while (BNGame.wannaPlayAgain());
     }
@@ -28,7 +30,7 @@ public class BattleNavale
     private static void printIntro()
     {
         System.out.println("Welcome to Battle Navale!!!");
-        // TODO
+        // TODO: Extend with boats info (size of each, etc)
     }
 
     private static int askForInput(String message)
@@ -36,14 +38,12 @@ public class BattleNavale
         int input = -1;
         System.out.print(message);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        while ( input < 0) {
-            try {
-                input = Integer.parseInt(br.readLine());
-            } catch (NumberFormatException nfe) {
-                System.err.println("Formato no válido");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            input = Integer.parseInt(br.readLine());
+        } catch (NumberFormatException nfe) {
+            System.err.println("Invalid format: Please enter an integer");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         System.out.println();
         return input;
@@ -58,7 +58,7 @@ public class BattleNavale
             case TOUCHE:
                 System.out.println("Touche!"); break;
             case MURRI:
-                System.out.println("Murri!!!"); break;
+                System.out.println("Murri!!! You destroyed a boat!"); break;
             case DISCOVERED:
                 System.out.println("You have already discovered that position..."); break;
             case INVALID:
@@ -77,7 +77,7 @@ public class BattleNavale
             try {
                 input = br.readLine();
             } catch (NumberFormatException nfe) {
-                System.err.println("Formato no válido");
+                System.err.println("Invalid format");
             } catch (IOException e) {
                 e.printStackTrace();
             }

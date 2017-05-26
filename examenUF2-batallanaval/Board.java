@@ -12,7 +12,7 @@ public class Board
     private static final int width = 10;
     private static final int height = 10;
     private static Cell[][] board;
-    private ArrayList<Boat> boats = new ArrayList();
+    private static ArrayList<Boat> boats = new ArrayList();
 
     // Constructors
     public Board() {
@@ -21,11 +21,10 @@ public class Board
     }
 
     // Getters
-    @Contract(pure = true)
     public static int getWidth() { return width; }
-    @Contract(pure = true)
     public static int getHeight() { return height; }
-    public Cell[][] getBoard() { return board; }
+    public static Cell[][] getBoard() { return board; }
+    public static int getNboats() { return boats.size(); }
 
     // Methods
     private void initializeBoard()

@@ -26,6 +26,7 @@ public class BNGame
     public int getTries() { return this.tries; }
     public boolean areBoatsDiscovered() { return this.occupiedcells == this.touches; }
     public boolean areTriesLeft() { return this.tries > 0; }
+    public boolean isGameFinished() { return areBoatsDiscovered() || !areTriesLeft(); }
     public boolean wannaPlayAgain() { return this.playagain; }
 
     // Setters
@@ -58,7 +59,7 @@ public class BNGame
         if(check != InputChecks.DISCOVERED && check != InputChecks.INVALID && check != InputChecks.UNDEFINED) {
             board.getBoard()[x][y].setDiscovered(true);
             useTry();
-            if(check == InputChecks.TOUCHE) {
+            if(check == InputChecks.TOUCHE || check == InputChecks.MURRI) {
                 addTouche();
                 board.getBoard()[x][y].getBoat().addHit();
             }
@@ -74,15 +75,15 @@ public class BNGame
             System.out.print((rowcount > 9) ? rowcount+" - " : rowcount+"  - ");
             for(Cell cell : cellrow)
             {
-                /*if(cell.isDiscovered()) // Iterates through each cell
-                {*/
-                    if(cell.getContent() == BoardCells.WATER)
+                if(cell.isDiscovered()) // Iterates through each cell
+                {
+                    if (cell.getContent() == BoardCells.WATER)
                         System.out.print(" ~ ");
-                    else if(cell.getContent() == BoardCells.BOAT)
+                    else if (cell.getContent() == BoardCells.BOAT)
                         System.out.print(" O ");
-                /*}
+                }
                 else
-                    System.out.print(" * ");*/
+                    System.out.print(" * ");
             }
             System.out.print("\n\n");
             rowcount++;
@@ -93,5 +94,22 @@ public class BNGame
         for(int i = 0; i< Board.getWidth(); i++)
             System.out.print((i > 9) ? " "+i : " "+i+" ");
         System.out.println();
+    }
+
+    public String summariseGame()
+    {
+        String summary = "";
+        if(areBoatsDiscovered())
+        {
+            summary += " ----- CONGRATULATIONS!!! -----\n";
+            summary += "You won with " + getTries() + " tries left.\n";
+        }
+        else
+        {
+            summary += "It's all there... black and white... CLEAR AS CRYSTAL!\n";
+            summary += "You get NOTHING! You LOSE!\n";
+            summary += "GOOD DAY SIR!\n";
+        }
+        return summary;
     }
 }
