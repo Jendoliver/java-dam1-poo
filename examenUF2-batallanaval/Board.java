@@ -38,6 +38,10 @@ public class Board
         }
     }
 
+    /**
+     * Loop that calls checkBoatPosition and addBoat if the first returns true
+     * for the number of boats to be positioned.
+     */
     private void placeBoats()
     {
         int boatsplaced = 0;
@@ -53,17 +57,19 @@ public class Board
     }
 
     /**
-     * @param boat = boat to check
+     * @param boat = boat to check, given that it always fits in the board
      * @return true if boat can be positioned
+     *          Checks the position of the boat and its neighbours to make sure they aren't
+     *          occupied, thus if they are it can't be positioned
      */
     private boolean checkBoatPosition(Boat boat)
     {
         int row = boat.getRow(), col = boat.getCol(), boatsize = boat.getBoatsize();
         if(boat.getOrientation() == Orientations.H)
         {
-            for(int i = (row == 0) ? row : row-1; i < (row == height ? row : row+1); i++)
+            for(int i = (row == 0) ? row : row-1; i <= (row+1 == height ? row : row+1); i++)
             {
-                for (int j = (col == 0) ? col : col-1; j < ((col+boatsize <= width) ? col+boatsize : col+boatsize-1); j++) {
+                for (int j = (col == 0) ? col : col-1; j <= col+boatsize; j++) {
                     if (board[i][j].getContent() == BoardCells.BOAT)
                         return false;
                 }
@@ -71,9 +77,9 @@ public class Board
         }
         else
         {
-            for(int i = (row == 0) ? row : row-1; i < ((row+boatsize <= height) ? row+boatsize : row+boatsize-1); i++)
+            for(int i = (row == 0) ? row : row-1; i <= row+boatsize; i++)
             {
-                for (int j = (col == 0) ? col : col-1; j < (col+1 > width ? col : col+1); j++) {
+                for (int j = (col == 0) ? col : col-1; j <= (col+1 == width ? col : col+1); j++) {
                     if (board[i][j].getContent() == BoardCells.BOAT)
                         return false;
                 }
@@ -83,9 +89,10 @@ public class Board
     }
 
     /**
-     * @param boat = boat to add
+     * @param boat = boat to add, which has a correct origin position
      *          Adds a boat to the board
-     *             and the cells corresponding to the boat to its instance
+     *             and saves the instance of the boad added on each cell it occupies,
+     *             so it can be accessed when a shot is made to process if the boat has been destroyed
      */
     private void addBoat(Boat boat)
     {

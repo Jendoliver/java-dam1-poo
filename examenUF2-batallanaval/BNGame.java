@@ -79,7 +79,7 @@ public class BNGame
                     if(cell.getContent() == BoardCells.WATER)
                         System.out.print(" ~ ");
                     else if(cell.getContent() == BoardCells.BOAT)
-                        System.out.print(" ^ ");
+                        System.out.print(" O ");
                 /*}
                 else
                     System.out.print(" * ");*/
