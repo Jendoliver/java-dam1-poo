@@ -58,6 +58,7 @@ public class Board
 
     /**
      * @param boat = boat to check, given that it always fits in the board
+     *             (row+boatsize or col+boatsize can never be > width / row respectively)
      * @return true if boat can be positioned
      *          Checks the position of the boat and its neighbours to make sure they aren't
      *          occupied, thus if they are it can't be positioned
