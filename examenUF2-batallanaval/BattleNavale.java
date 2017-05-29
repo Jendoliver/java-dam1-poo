@@ -82,7 +82,7 @@ public class BattleNavale
             }
             case HARD: // 20x20, 10 boats, 7 7 6 6 5 4 3 2 1 1
             {
-                int[] boatsarray = {7, 7, 6, 6, 5, 4, 3, 2, 1, 1};
+                int[] boatsarray = {7, 7, 6, 6, 5, 4, 3, 2, 1, 1, 5, 5, 5, 5, 5};
                 gp.width = 20;
                 gp.height = 20;
                 gp.tries = 180;
@@ -109,15 +109,15 @@ public class BattleNavale
 
     private static void printDocumentation()
     {
-        System.out.println("--- BATTLE NAVALE: Documentation ---");
-        System.out.println("Syntax: java BattleNavale <mode>");
-        System.out.println("<mode> can be one of the following:");
-        System.out.println("-m | -h | help | man --- Prints this documentation");
-        System.out.println("easy | 1 --- Plays the game on easy mode");
-        System.out.println("medium | 2 --- Plays the game on medium mode");
-        System.out.println("hard | 3 --- Plays the game on hard mode");
-        System.out.println("classic --- Plays the game on classic mode");
-        System.out.println("custom --- Plays the game with custom board size, number of boats and max boat length (they will be asked on start)");
+        System.out.println("\n\n--- BATTLE NAVALE: Documentation ---\n");
+        System.out.println("Syntax: java BattleNavale <mode> where");
+        System.out.println("<mode> is one of the following:\n");
+        System.out.println("    -m | -h | help | man --- Prints this documentation");
+        System.out.println("    easy | 1 --- Plays the game on easy mode");
+        System.out.println("    medium | 2 --- Plays the game on medium mode");
+        System.out.println("    hard | 3 --- Plays the game on hard mode");
+        System.out.println("    classic --- Plays the game on classic mode");
+        System.out.println("    custom --- Plays the game with custom board size, number of boats and max boat length (they will be asked on start)");
     }
     
     private static void printIntro()
@@ -128,8 +128,9 @@ public class BattleNavale
 
     private static GameProperties askProperties()
     {
+        // Maxlength: min side of the board - 2
         GameProperties gp = null;
-        // TODO: Ask for user input
+        int width = askForInput("Enter a width");
         return gp;
     }
 

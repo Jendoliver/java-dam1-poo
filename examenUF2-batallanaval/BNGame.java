@@ -34,7 +34,7 @@ public class BNGame
     // Methods
     public InputChecks checkPosition(int x, int y)
     {
-        if(x < 0 || x > Board.getWidth() || y < 0 || x > Board.getHeight())
+        if(x < 0 || x > Board.getWidth() || y < 0 || y > Board.getHeight())
             return InputChecks.INVALID;
         else if( board.getBoard()[x][y].isDiscovered() )
             return InputChecks.DISCOVERED;
@@ -72,15 +72,15 @@ public class BNGame
             System.out.print((rowcount > 9) ? rowcount+" - " : rowcount+"  - ");
             for(Cell cell : cellrow)
             {
-                /*if(cell.isDiscovered()) // Iterates through each cell
-                {*/
+                if(cell.isDiscovered()) // Iterates through each cell
+                {
                     if (cell.getContent() == BoardCells.WATER)
                         System.out.print(" ~ ");
                     else if (cell.getContent() == BoardCells.BOAT)
                         System.out.print(" O ");
-                /*}
+                }
                 else
-                    System.out.print(" * ");*/
+                    System.out.print(" * ");
             }
             System.out.print("\n\n");
             rowcount++;
