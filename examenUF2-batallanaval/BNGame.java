@@ -18,6 +18,10 @@ public class BNGame
         this.tries = gp.tries;
         this.occupiedcells = this.board.getOccupiedCells();
     }
+    public BNGame()
+    {
+
+    }
 
     // Getters
     public int getTries() { return this.tries; }
@@ -34,8 +38,10 @@ public class BNGame
     // Methods
     public InputChecks checkPosition(int x, int y)
     {
-        if(x < 0 || x > Board.getWidth() || y < 0 || y > Board.getHeight())
-            return InputChecks.INVALID;
+        if(x < 0 || x > Board.getHeight())
+            return InputChecks.INVALID_ROW;
+        else if(y < 0 || y > Board.getWidth())
+            return InputChecks.INVALID_COL;
         else if( board.getBoard()[x][y].isDiscovered() )
             return InputChecks.DISCOVERED;
         else if(board.getBoard()[x][y].getContent() == BoardCells.WATER)
@@ -53,7 +59,7 @@ public class BNGame
 
     public void processPosition(InputChecks check, int x, int y)
     {
-        if(check != InputChecks.DISCOVERED && check != InputChecks.INVALID && check != InputChecks.UNDEFINED) {
+        if(check != InputChecks.DISCOVERED && check != InputChecks.INVALID_ROW && check != InputChecks.INVALID_COL && check != InputChecks.UNDEFINED) {
             board.getBoard()[x][y].setDiscovered(true);
             useTry();
             if(check == InputChecks.TOUCHE || check == InputChecks.MURRI) {

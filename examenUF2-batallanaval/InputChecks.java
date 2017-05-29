@@ -3,7 +3,8 @@
  */
 public enum InputChecks
 {
-    INVALID,
+    INVALID_ROW,
+    INVALID_COL,
     DISCOVERED,
     WATER,
     TOUCHE,

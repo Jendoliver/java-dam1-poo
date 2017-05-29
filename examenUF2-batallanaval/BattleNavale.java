@@ -82,7 +82,7 @@ public class BattleNavale
             }
             case HARD: // 20x20, 10 boats, 7 7 6 6 5 4 3 2 1 1
             {
-                int[] boatsarray = {7, 7, 6, 6, 5, 4, 3, 2, 1, 1, 5, 5, 5, 5, 5};
+                int[] boatsarray = {7, 7, 6, 6, 5, 4, 3, 2, 1, 1};
                 gp.width = 20;
                 gp.height = 20;
                 gp.tries = 180;
@@ -128,9 +128,16 @@ public class BattleNavale
 
     private static GameProperties askProperties()
     {
-        // Maxlength: min side of the board - 2
         GameProperties gp = null;
-        int width = askForInput("Enter a width");
+        gp.width = askForInput("Enter a width between 20 and 50: ");
+        gp.height = askForInput("Enter a height between 20 and 50: ");
+        int nboats = askForInput("Enter a number of boats between 1 and 15: ");
+        gp.boats = new int[nboats];
+        for(int i=0; i < gp.boats.length; i++)
+        {
+            gp.boats[i] = askForInput("Enter the lenght of the boat num "+(i+1)": ");
+        }
+        gp.tries = askForInput("Enter your desired number of tries to win this battle: ");
         return gp;
     }
 
@@ -162,8 +169,10 @@ public class BattleNavale
                 System.out.println("Murri!!! You destroyed a boat!"); break;
             case DISCOVERED:
                 System.out.println("You have already discovered that position..."); break;
-            case INVALID:
-                System.out.println("Introduce un rango de filas entre 0 y "+Board.getHeight()+", y un rango de columnas entre 0 y "+ Board.getWidth()); break;
+            case INVALID_ROW:
+                System.out.println("Please insert a row range between 0 and "+Board.getHeight()); break;
+            case INVALID_COL:
+                System.out.println("Please insert a column range between 0 and "+Board.getWidth()); break;
             case UNDEFINED:
                 System.out.println("UNDEFINED"); break;
         }
