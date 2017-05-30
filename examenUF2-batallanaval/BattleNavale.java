@@ -10,7 +10,6 @@ public class BattleNavale
         BNGame BNGame;
         GameModes mode = decodeArgs(args);
         GameProperties gp = prepareGameMode(mode);
-        if(mode == GameModes.DOCUMENTATION) return; // Exits game if documentation is printed
         do {
             BNGame = new BNGame(gp);
             printIntro();
@@ -36,7 +35,8 @@ public class BattleNavale
             switch (args[0])
             {
                 case "help":case "man":case "-h":case "-m":
-                    return GameModes.DOCUMENTATION;
+                    printDocumentation();
+                    System.exit(0);
                 case "easy":case "1":
                     return GameModes.EASY;
                 case "medium":case "2":
@@ -57,11 +57,6 @@ public class BattleNavale
         GameProperties gp = new GameProperties();
         switch(mode)
         {
-            case DOCUMENTATION:
-            {
-                printDocumentation();
-                break;
-            }
             case EASY: // 5x5, 3 boats, 3 3 2, 15 tries
             {
                 int[] boatsarray = {3, 3, 2};
@@ -128,14 +123,14 @@ public class BattleNavale
 
     private static GameProperties askProperties()
     {
-        GameProperties gp = null;
+        GameProperties gp = new GameProperties();
         gp.width = askForInput("Enter a width between 20 and 50: ");
         gp.height = askForInput("Enter a height between 20 and 50: ");
         int nboats = askForInput("Enter a number of boats between 1 and 15: ");
         gp.boats = new int[nboats];
         for(int i=0; i < gp.boats.length; i++)
         {
-            gp.boats[i] = askForInput("Enter the lenght of the boat num "+(i+1)": ");
+            gp.boats[i] = askForInput("Enter the lenght of the boat num "+(i+1)+": ");
         }
         gp.tries = askForInput("Enter your desired number of tries to win this battle: ");
         return gp;
