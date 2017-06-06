@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by the Focking Jendoliver on 22/05/2017.
  *  GitHub: github.com/Jendoliver
@@ -5,9 +7,11 @@
 public class BNGame 
 {
     private Board board;
+    private int maxtries;
     private int tries;
     private int occupiedcells;
     private int touches;
+    private ArrayList<int[]> shots;
     private boolean playagain = false;
 
     public BNGame(GameProperties gp)
@@ -15,16 +19,25 @@ public class BNGame
         this.touches = 0;
         this.board = new Board(gp);
         // this.tries = this.board.getEmptyCells() / 2; DEPRECATED
+        this.maxtries = gp.tries;
         this.tries = gp.tries;
+        this.shots = new ArrayList();
         this.occupiedcells = this.board.getOccupiedCells();
     }
-    public BNGame()
+    public BNGame(int maxtries, int width, int height) // LOAD GAME CONSTRUCTOR
     {
-
+        this.touches = 0;
+        this.board = new Board(width, height);
+        this.maxtries = maxtries;
+        this.tries = maxtries;
+        this.shots = new ArrayList();
+        this.occupiedcells = this.board.getOccupiedCells();
     }
 
     // Getters
+    public int getMaxTries() { return this.maxtries; }
     public int getTries() { return this.tries; }
+    public ArrayList<int[]> getShots() { return this.shots; };
     public boolean areBoatsDiscovered() { return this.occupiedcells == this.touches; }
     public boolean areTriesLeft() { return this.tries > 0; }
     public boolean isGameFinished() { return areBoatsDiscovered() || !areTriesLeft(); }
@@ -34,6 +47,7 @@ public class BNGame
     public void setPlayagain(boolean playagain) { this.playagain = playagain; }
     public void useTry() { this.tries--; }
     public void addTouche() { this.touches++; }
+    public void addShot(int x, int y) { int[] shot = {x, y}; this.shots.add(shot); }
 
     // Methods
     public InputChecks checkPosition(int x, int y)
@@ -61,6 +75,7 @@ public class BNGame
     {
         if(check != InputChecks.DISCOVERED && check != InputChecks.INVALID_ROW && check != InputChecks.INVALID_COL && check != InputChecks.UNDEFINED) {
             board.getBoard()[x][y].setDiscovered(true);
+            addShot(x, y);
             useTry();
             if(check == InputChecks.TOUCHE || check == InputChecks.MURRI) {
                 addTouche();

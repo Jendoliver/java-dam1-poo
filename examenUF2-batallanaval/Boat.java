@@ -37,6 +37,14 @@ public class Boat
         }
     }
 
+    public Boat(int boatsize, Orientations orientation, int row, int col) // LOAD GAME
+    {
+        this.boatsize = boatsize;
+        this.orientation = orientation;
+        this.row = row;
+        this.col = col;
+    }
+
     // Getters
     public int getBoatsize() { return boatsize; }
     public Orientations getOrientation() { return orientation; }
