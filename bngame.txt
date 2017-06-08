@@ -1,0 +1,1 @@
+{"width":10,"boats":["boat: {\"col\":4,\"orientation\":H,\"boatsize\":5,\"row\":8}","boat: {\"col\":1,\"orientation\":H,\"boatsize\":4,\"row\":2}","boat: {\"col\":3,\"orientation\":H,\"boatsize\":3,\"row\":4}","boat: {\"col\":7,\"orientation\":V,\"boatsize\":3,\"row\":0}","boat: {\"col\":0,\"orientation\":H,\"boatsize\":2,\"row\":0}"],"height":10,"maxtries":50}
