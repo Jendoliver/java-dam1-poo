@@ -16,7 +16,7 @@ public class BattleNavale
             BNGame.printBoard();
             do {
                 System.out.println("Shots left: "+ BNGame.getTries());
-                int x = askForInput("Input the row to attack (or type S to save): ");
+                int x = askForInput("Input the row to attack (or type S to save and quit): ");
                 if (x == -696969) FileManager.save(BNGame); // TODO: PLEASE REFACTOR THIS MY EYES ARE BLEEDING
                 int y = askForInput("Input the column to attack: ");
                 InputChecks check = BNGame.checkPosition(x, y);

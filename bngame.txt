@@ -1,1 +1,18 @@
-{"width":10,"boats":["boat: {\"col\":4,\"orientation\":H,\"boatsize\":5,\"row\":8}","boat: {\"col\":1,\"orientation\":H,\"boatsize\":4,\"row\":2}","boat: {\"col\":3,\"orientation\":H,\"boatsize\":3,\"row\":4}","boat: {\"col\":7,\"orientation\":V,\"boatsize\":3,\"row\":0}","boat: {\"col\":0,\"orientation\":H,\"boatsize\":2,\"row\":0}"],"height":10,"maxtries":50}
+{
+    "width":10,
+    "boats":[
+        {"col":5,"orientation":V,"boatsize":5,"row":2},
+        {"col":5,"orientation":H,"boatsize":4,"row":8},
+        {"col":1,"orientation":V,"boatsize":3,"row":5},
+        {"col":3,"orientation":V,"boatsize":3,"row":5},
+        {"col":1,"orientation":H,"boatsize":2,"row":1}
+        ],
+    "shots":[
+        {"x":1,"y":1},
+        {"x":0,"y":1},
+        {"x":2,"y":1},
+        {"x":1,"y":2}
+        ],
+    "height":10,
+    "maxtries":50
+}

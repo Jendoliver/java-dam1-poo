@@ -1,12 +1,9 @@
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import static java.lang.Math.toIntExact;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  * Created by the Focking Jendoliver on 06/06/2017
@@ -37,7 +34,7 @@ public class FileManager
             boatJSON.put("col", boat.getCol());
             boatJSON.put("boatsize", boat.getBoatsize());
             boatJSON.put("orientation", boat.getOrientation());
-            boatsJSON.add("boat: "+boatJSON);
+            boatsJSON.add(boatJSON);
         }
         data.put("boats", boatsJSON);
 
@@ -48,7 +45,7 @@ public class FileManager
                 JSONObject shotJSON = new JSONObject();
                 shotJSON.put("x", shot[0]);
                 shotJSON.put("y", shot[1]);
-                shotsJSON.add("shot: " + shotJSON);
+                shotsJSON.add(shotJSON);
             }
             data.put("shots", shotsJSON);
         }
@@ -63,12 +60,13 @@ public class FileManager
         } finally {
             file.flush();
             file.close();
+            System.exit(0);
         }
     }
 
     public static BNGame load() throws IOException
     {
-        BNGame game = null;
+        BNGame game = null;/*
         JSONParser parser = new JSONParser();
         try
         {
@@ -82,13 +80,13 @@ public class FileManager
 
             // Boats data
             JSONArray boatsJSON = (JSONArray) data.get("boats");
-            Iterator<JSONObject> it = boatsJSON.iterator();
-            while (it.hasNext())
+            List<JSONObject> jsonItems = IntStream.range(0, boatsJSON.size());
+            for(int i=0; i<boatsJSON.length(); )
             {
-                JSONObject boatJSON = it.next();
-                int boatsize = (int)boatJSON.get("boatsize");
-                int row = (int)boatJSON.get("row");
-                int col = (int)boatJSON.get("col");
+                JSONObject boatJSON = (JSONObject)it.next();
+                int boatsize = toIntExact((long)boatJSON.get("boatsize"));
+                int row = toIntExact((long)boatJSON.get("row"));
+                int col = toIntExact((long)boatJSON.get("col"));
                 Orientations orientation = (Orientations)boatJSON.get("orientation");
                 Boat boat = new Boat(boatsize, orientation, row, col);
                 Board.addBoat(boat);
@@ -99,9 +97,9 @@ public class FileManager
             it = shotsJSON.iterator();
             while (it.hasNext())
             {
-                JSONObject shotJSON = it.next();
-                int x = (int)shotJSON.get("x");
-                int y = (int)shotJSON.get("y");
+                JSONObject shotJSON = (JSONObject)it.next();
+                int x = toIntExact((long)shotJSON.get("x"));
+                int y = toIntExact((long)shotJSON.get("y"));
                 InputChecks check = game.checkPosition(x, y);
                 game.processPosition(check, x, y);
             }
@@ -109,7 +107,7 @@ public class FileManager
         } catch (ParseException e) {
             System.err.println("ERROR ON FILE PARSING");
             e.printStackTrace();
-        }
+        }*/
         return game;
     }
 }

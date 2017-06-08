@@ -120,7 +120,7 @@ public class BNGame
         if(areBoatsDiscovered())
         {
             summary += " ----- CONGRATULATIONS!!! -----\n";
-            summary += "You won with " + getTries() + " tries left.\n";
+            summary += "You won with " + getTries() + " shots left.\n";
         }
         else
         {
