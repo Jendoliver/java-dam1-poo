@@ -11,12 +11,13 @@ public class BattleNavale
         GameModes mode = decodeArgs(args);
         GameProperties gp = prepareGameMode(mode);
         do {
-            BNGame = new BNGame(gp);
+            BNGame = (askYNQuestion("Do you want to load a previous game?")) ? FileManager.load() : new BNGame(gp);
             printIntro();
             BNGame.printBoard();
             do {
                 System.out.println("Shots left: "+ BNGame.getTries());
-                int x = askForInput("Input the row to attack: ");
+                int x = askForInput("Input the row to attack (or type S to save and quit): ");
+                if (x == -696969) FileManager.save(BNGame); // TODO: PLEASE REFACTOR THIS MY EYES ARE BLEEDING
                 int y = askForInput("Input the column to attack: ");
                 InputChecks check = BNGame.checkPosition(x, y);
                 BNGame.processPosition(check, x, y);
@@ -24,7 +25,7 @@ public class BattleNavale
                 printInputCheck(check);
             } while ( ! BNGame.isGameFinished());
             System.out.println(BNGame.summariseGame());
-            BNGame.setPlayagain(askToPlayAgain());
+            BNGame.setPlayagain(askYNQuestion("Do you want to play again?"));
         } while (BNGame.wannaPlayAgain());
     }
 
@@ -136,16 +137,21 @@ public class BattleNavale
         return gp;
     }
 
-    private static int askForInput(String message)
+    private static int askForInput(String message) // TODO: Refactor return value
     {
         int input = -1;
+        String saveInput;
         System.out.print(message);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
-            input = Integer.parseInt(br.readLine());
-        } catch (NumberFormatException nfe) {
+            saveInput = br.readLine();
+            if(saveInput.equals("s") || saveInput.equals("S"))
+                return -696969; // Ninja patch aka PLEASE REFACTOR THIS
+            else
+                input = Integer.parseInt(saveInput);
+        }/* catch (NumberFormatException nfe) {
             System.err.println("Invalid format: Please enter an integer");
-        } catch (IOException e) {
+        }*/ catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println();
@@ -173,11 +179,11 @@ public class BattleNavale
         }
     }
 
-    private static boolean askToPlayAgain()
+    private static boolean askYNQuestion(String question)
     {
         String input = "not valid";
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Wanna play again? (y/n): ");
+        System.out.print(question+" (y/n): ");
         do {
             try {
                 input = br.readLine();

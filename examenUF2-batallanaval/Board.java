@@ -22,11 +22,17 @@ public class Board
         placeBoats(gp.boats);
     }
 
+    public Board(int width, int height) {
+        this.width = width;
+        this.height = height;
+        initializeBoard();
+    }
+
     // Getters
     public static int getWidth() { return width; }
     public static int getHeight() { return height; }
     public static Cell[][] getBoard() { return board; }
-    public static int getNboats() { return boats.size(); }
+    public static ArrayList<Boat> getBoats() { return boats; }
 
     // Methods
     private void initializeBoard()
@@ -95,7 +101,7 @@ public class Board
      *             and saves the instance of the boad added on each cell it occupies,
      *             so it can be accessed when a shot is made to process if the boat has been destroyed
      */
-    private void addBoat(Boat boat)
+    public static void addBoat(Boat boat)
     {
         boats.add(boat);
         int row = boat.getRow(), col = boat.getCol(), boatsize = boat.getBoatsize();
