@@ -1,18 +1,1 @@
-{
-    "width":10,
-    "boats":[
-        {"col":5,"orientation":V,"boatsize":5,"row":2},
-        {"col":5,"orientation":H,"boatsize":4,"row":8},
-        {"col":1,"orientation":V,"boatsize":3,"row":5},
-        {"col":3,"orientation":V,"boatsize":3,"row":5},
-        {"col":1,"orientation":H,"boatsize":2,"row":1}
-        ],
-    "shots":[
-        {"x":1,"y":1},
-        {"x":0,"y":1},
-        {"x":2,"y":1},
-        {"x":1,"y":2}
-        ],
-    "height":10,
-    "maxtries":50
-}
+{"width":10,"boats":[{"col":0,"orientation":"H","boatsize":5,"row":8},{"col":0,"orientation":"V","boatsize":4,"row":2},{"col":6,"orientation":"H","boatsize":3,"row":1},{"col":5,"orientation":"H","boatsize":3,"row":3},{"col":3,"orientation":"H","boatsize":2,"row":6}],"shots":[{"x":0,"y":0},{"x":1,"y":1},{"x":2,"y":2},{"x":3,"y":3},{"x":4,"y":4},{"x":5,"y":5},{"x":6,"y":6},{"x":7,"y":7},{"x":9,"y":8},{"x":9,"y":9},{"x":8,"y":8}],"height":10,"maxtries":50}

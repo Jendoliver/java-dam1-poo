@@ -1,9 +1,13 @@
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONTokener;
 
 /**
  * Created by the Focking Jendoliver on 06/06/2017
@@ -34,7 +38,7 @@ public class FileManager
             boatJSON.put("col", boat.getCol());
             boatJSON.put("boatsize", boat.getBoatsize());
             boatJSON.put("orientation", boat.getOrientation());
-            boatsJSON.add(boatJSON);
+            boatsJSON.put(boatJSON);
         }
         data.put("boats", boatsJSON);
 
@@ -45,14 +49,14 @@ public class FileManager
                 JSONObject shotJSON = new JSONObject();
                 shotJSON.put("x", shot[0]);
                 shotJSON.put("y", shot[1]);
-                shotsJSON.add(shotJSON);
+                shotsJSON.put(shotJSON);
             }
             data.put("shots", shotsJSON);
         }
 
         FileWriter file = new FileWriter("bngame.txt");
         try {
-            file.write(data.toJSONString());
+            file.write(data.toString());
             System.out.println("Game successfully saved!");
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,48 +70,44 @@ public class FileManager
 
     public static BNGame load() throws IOException
     {
-        BNGame game = null;/*
-        JSONParser parser = new JSONParser();
-        try
+        BNGame game;
+        JSONObject data = (JSONObject) new JSONTokener(new FileReader("bngame.txt")).nextValue();
+
+        // General game data
+        int maxtries = data.getInt("maxtries");
+        int width = data.getInt("width");
+        int height = data.getInt("height");
+        game = new BNGame(maxtries, width, height);
+
+        // Boats data
+        JSONArray boatsJSON = data.getJSONArray("boats");
+        for(int i=0; i < boatsJSON.length(); i++)
         {
-            JSONObject data = (JSONObject) parser.parse(new FileReader("bngame.txt"));
-
-            // General game data
-            int maxtries = toIntExact((long)data.get("maxtries"));
-            int width = toIntExact((long)data.get("width"));
-            int height = toIntExact((long)data.get("height"));
-            game = new BNGame(maxtries, width, height);
-
-            // Boats data
-            JSONArray boatsJSON = (JSONArray) data.get("boats");
-            List<JSONObject> jsonItems = IntStream.range(0, boatsJSON.size());
-            for(int i=0; i<boatsJSON.length(); )
+            JSONObject boatJSON = boatsJSON.getJSONObject(i);
+            int boatsize = boatJSON.getInt("boatsize");
+            int row = boatJSON.getInt("row");
+            int col = boatJSON.getInt("col");
+            String orientationStr = boatJSON.getString("orientation");
+            Orientations orientation = Orientations.H;
+            switch(orientationStr)
             {
-                JSONObject boatJSON = (JSONObject)it.next();
-                int boatsize = toIntExact((long)boatJSON.get("boatsize"));
-                int row = toIntExact((long)boatJSON.get("row"));
-                int col = toIntExact((long)boatJSON.get("col"));
-                Orientations orientation = (Orientations)boatJSON.get("orientation");
-                Boat boat = new Boat(boatsize, orientation, row, col);
-                Board.addBoat(boat);
+                case "V": orientation = Orientations.V; break;
+                case "H": orientation = Orientations.H; break;
             }
+            Boat boat = new Boat(boatsize, orientation, row, col);
+            Board.addBoat(boat);
+        }
 
-            // Shots data
-            JSONArray shotsJSON = (JSONArray) data.get("shots");
-            it = shotsJSON.iterator();
-            while (it.hasNext())
-            {
-                JSONObject shotJSON = (JSONObject)it.next();
-                int x = toIntExact((long)shotJSON.get("x"));
-                int y = toIntExact((long)shotJSON.get("y"));
-                InputChecks check = game.checkPosition(x, y);
-                game.processPosition(check, x, y);
-            }
-
-        } catch (ParseException e) {
-            System.err.println("ERROR ON FILE PARSING");
-            e.printStackTrace();
-        }*/
+        // Shots data
+        JSONArray shotsJSON = data.getJSONArray("shots");
+        for (int i=0; i < shotsJSON.length(); i++)
+        {
+            JSONObject shotJSON = shotsJSON.getJSONObject(i);
+            int x = shotJSON.getInt("x");
+            int y = shotJSON.getInt("y");
+            InputChecks check = game.checkPosition(x, y);
+            game.processPosition(check, x, y);
+        }
         return game;
     }
 }
