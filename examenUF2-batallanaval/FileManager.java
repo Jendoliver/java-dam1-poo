@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 /**
- * Created by the Focking Jendoliver on 06/06/2017
+ * Created by Jendoliver on 06/06/2017
  * GitHub: github.com/Jendoliver
  */
 public class FileManager

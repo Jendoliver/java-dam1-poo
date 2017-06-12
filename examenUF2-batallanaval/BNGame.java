@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Created by the Focking Jendoliver on 22/05/2017.
+ * Created by Jendoliver on 22/05/2017.
  *  GitHub: github.com/Jendoliver
  */
 public class BNGame 

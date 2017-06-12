@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BattleNavale
 {
@@ -9,7 +10,7 @@ public class BattleNavale
         GameProperties gp = prepareGameMode(mode);
         do {
             BNGame = (Input.askYNQuestion("Do you want to load a previous game?")) ? FileManager.load() : new BNGame(gp);
-            printIntro();
+            printIntro(BNGame.getTries(), Board.getBoats());
             BNGame.printBoard();
             do {
                 System.out.println("Shots left: "+ BNGame.getTries());
@@ -113,22 +114,22 @@ public class BattleNavale
         System.out.println("    custom --- Plays the game with custom board size, number of boats and max boat length (they will be asked on start)");
     }
     
-    private static void printIntro()
+    private static void printIntro(int ntries, ArrayList<Boat> boats)
     {
-        System.out.println("Welcome to Battle Navale!!!");
-        // TODO: Extend with boats info (size of each, etc)
+        System.out.println("\n\nWelcome to Battle Navale!!!");
+        System.out.println("You have "+ntries+ " tries to discover "+boats.size()+" boats!!! Will you succeed?\n\n");
     }
 
     private static GameProperties askProperties()
     {
         GameProperties gp = new GameProperties();
-        gp.width = Input.askIntInput("Enter a width between 20 and 50: ");
-        gp.height = Input.askIntInput("Enter a height between 20 and 50: ");
-        int nboats = Input.askIntInput("Enter a number of boats between 1 and 15: ");
+        gp.width = Input.askIntInputBetween("Enter a width between 20 and 50: ", 20, 50);
+        gp.height = Input.askIntInputBetween("Enter a height between 20 and 50: ", 20, 50);
+        int nboats = Input.askIntInputBetween("Enter a number of boats between 1 and 15: ", 1, 15);
         gp.boats = new int[nboats];
         for(int i=0; i < gp.boats.length; i++)
         {
-            gp.boats[i] = Input.askIntInput("Enter the lenght of the boat num "+(i+1)+": ");
+            gp.boats[i] = Input.askIntInputBetween("Enter the lenght of the boat num "+(i+1)+" (between 1 and 10): ", 1, 10);
         }
         gp.tries = Input.askIntInput("Enter your desired number of tries to win this battle: ");
         return gp;

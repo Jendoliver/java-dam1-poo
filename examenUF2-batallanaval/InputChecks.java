@@ -1,5 +1,6 @@
 /**
- * Created by magne on 23/05/2017.
+ * Created by Jendoliver on 23/05/2017.
+ * GitHub: github.com/Jendoliver
  */
 public enum InputChecks
 {

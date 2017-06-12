@@ -1,5 +1,5 @@
 /**
- * Created by the Focking Jendoliver on 26/05/2017.
+ * Created by Jendoliver on 26/05/2017.
  *  GitHub: github.com/Jendoliver
  */
 public class GameProperties // ITS ACTUALLY AN STRUCT *cof* *cof*
