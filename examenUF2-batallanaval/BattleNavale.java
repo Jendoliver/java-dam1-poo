@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Objects;
 
 public class BattleNavale
 {
@@ -11,21 +8,21 @@ public class BattleNavale
         GameModes mode = decodeArgs(args);
         GameProperties gp = prepareGameMode(mode);
         do {
-            BNGame = (askYNQuestion("Do you want to load a previous game?")) ? FileManager.load() : new BNGame(gp);
+            BNGame = (Input.askYNQuestion("Do you want to load a previous game?")) ? FileManager.load() : new BNGame(gp);
             printIntro();
             BNGame.printBoard();
             do {
                 System.out.println("Shots left: "+ BNGame.getTries());
-                int x = askForInput("Input the row to attack (or type S to save and quit): ");
-                if (x == -696969) FileManager.save(BNGame); // TODO: PLEASE REFACTOR THIS MY EYES ARE BLEEDING
-                int y = askForInput("Input the column to attack: ");
+                int x = Input.askSaveInput("Input the row to attack (or type S to save and quit): ");
+                if (Input.isSaveInput) FileManager.save(BNGame);
+                int y = Input.askIntInput("Input the column to attack: ");
                 InputChecks check = BNGame.checkPosition(x, y);
                 BNGame.processPosition(check, x, y);
                 BNGame.printBoard();
                 printInputCheck(check);
             } while ( ! BNGame.isGameFinished());
             System.out.println(BNGame.summariseGame());
-            BNGame.setPlayagain(askYNQuestion("Do you want to play again?"));
+            BNGame.setPlayagain(Input.askYNQuestion("Do you want to play again?"));
         } while (BNGame.wannaPlayAgain());
     }
 
@@ -94,7 +91,7 @@ public class BattleNavale
                 gp.boats = boatsarray;
                 break;
             }
-            case CUSTOM: // Maxlength: min side of the board - 2, TODO: implement custom
+            case CUSTOM:
             {
                 gp = askProperties();
                 break;
@@ -125,37 +122,16 @@ public class BattleNavale
     private static GameProperties askProperties()
     {
         GameProperties gp = new GameProperties();
-        gp.width = askForInput("Enter a width between 20 and 50: ");
-        gp.height = askForInput("Enter a height between 20 and 50: ");
-        int nboats = askForInput("Enter a number of boats between 1 and 15: ");
+        gp.width = Input.askIntInput("Enter a width between 20 and 50: ");
+        gp.height = Input.askIntInput("Enter a height between 20 and 50: ");
+        int nboats = Input.askIntInput("Enter a number of boats between 1 and 15: ");
         gp.boats = new int[nboats];
         for(int i=0; i < gp.boats.length; i++)
         {
-            gp.boats[i] = askForInput("Enter the lenght of the boat num "+(i+1)+": ");
+            gp.boats[i] = Input.askIntInput("Enter the lenght of the boat num "+(i+1)+": ");
         }
-        gp.tries = askForInput("Enter your desired number of tries to win this battle: ");
+        gp.tries = Input.askIntInput("Enter your desired number of tries to win this battle: ");
         return gp;
-    }
-
-    private static int askForInput(String message) // TODO: Refactor return value
-    {
-        int input = -1;
-        String saveInput;
-        System.out.print(message);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            saveInput = br.readLine();
-            if(saveInput.equals("s") || saveInput.equals("S"))
-                return -696969; // Ninja patch aka PLEASE REFACTOR THIS
-            else
-                input = Integer.parseInt(saveInput);
-        }/* catch (NumberFormatException nfe) {
-            System.err.println("Invalid format: Please enter an integer");
-        }*/ catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println();
-        return input;
     }
 
     private static void printInputCheck(InputChecks check)
@@ -177,22 +153,5 @@ public class BattleNavale
             case UNDEFINED:
                 System.out.println("UNDEFINED"); break;
         }
-    }
-
-    private static boolean askYNQuestion(String question)
-    {
-        String input = "not valid";
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print(question+" (y/n): ");
-        do {
-            try {
-                input = br.readLine();
-            } catch (NumberFormatException nfe) {
-                System.err.println("Invalid format");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } while (! Objects.equals(input.toLowerCase(), "y") && ! Objects.equals(input.toLowerCase(), "n"));
-        return Objects.equals(input.toLowerCase(), "y");
     }
 }

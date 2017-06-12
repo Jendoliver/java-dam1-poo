@@ -2,7 +2,6 @@
  * Created by the Focking Jendoliver on 22/05/2017.
  *  GitHub: github.com/Jendoliver
  */
-// TODO: Implement this
 public enum GameModes {
     EASY, // 5x5, 3 boats, 3 3 2
     MEDIUM, // 15x15, 4 boats, 5 4 3 2

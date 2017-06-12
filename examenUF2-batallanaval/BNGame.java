@@ -18,7 +18,6 @@ public class BNGame
     {
         this.touches = 0;
         this.board = new Board(gp);
-        // this.tries = this.board.getEmptyCells() / 2; DEPRECATED
         this.maxtries = gp.tries;
         this.tries = gp.tries;
         this.shots = new ArrayList();
