@@ -123,8 +123,8 @@ public class BattleNavale
     private static GameProperties askProperties()
     {
         GameProperties gp = new GameProperties();
-        gp.width = Input.askIntInputBetween("Enter a width between 20 and 50: ", 20, 50);
-        gp.height = Input.askIntInputBetween("Enter a height between 20 and 50: ", 20, 50);
+        gp.width = Input.askIntInputBetween("Enter a board side between 20 and 50: ", 20, 50);
+        gp.height = gp.width;
         int nboats = Input.askIntInputBetween("Enter a number of boats between 1 and 15: ", 1, 15);
         gp.boats = new int[nboats];
         for(int i=0; i < gp.boats.length; i++)
