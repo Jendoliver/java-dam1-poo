@@ -111,7 +111,7 @@ public class BattleNavale
         System.out.println("    medium | 2 --- Plays the game on medium mode");
         System.out.println("    hard | 3 --- Plays the game on hard mode");
         System.out.println("    classic --- Plays the game on classic mode");
-        System.out.println("    custom --- Plays the game with custom board size, number of boats and max boat length (they will be asked on start)");
+        System.out.println("    custom --- Plays the game with custom board size, number of boats and boat lengths (they will be asked on start)");
     }
     
     private static void printIntro(int ntries, ArrayList<Boat> boats)
